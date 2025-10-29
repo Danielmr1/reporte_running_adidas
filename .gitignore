@@ -1,0 +1,14 @@
+# Secretos de Streamlit (IMPORTANTE)
+.streamlit/secrets.toml
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+env/
+venv/
+
+# IDE
+.vscode/
+.idea/
