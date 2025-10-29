@@ -2,6 +2,9 @@
 
 Aplicación web interactiva para análisis avanzado de datos de running, desarrollada en Python usando Streamlit, con machine learning e integración IA. Revisa el rendimiento deportivo, visualiza y agrupa sesiones, predice tiempos y ofrece reportes descargables.
 
+## 🚀 Acceso rápido
+
+**[▶️ Abre la app en Streamlit Cloud](https://reporte-running-adidas.streamlit.app/)**
 
 ---
 
