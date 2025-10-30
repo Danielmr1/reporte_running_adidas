@@ -162,17 +162,45 @@ def analizar_con_perplexity(texto_resumen, pregunta):
     if not api_key:
         st.error("Falta la clave PERPLEXITY_API_KEY en Streamlit secrets.")
         return None
+
     headers = {"Authorization": f"Bearer {api_key}", "Content-Type": "application/json"}
-    
+
+    # 🔹 Prompt mejorado: instrucciones claras, tono profesional, límite de extensión
     prompt = (
         "Eres un asistente experto en análisis de rendimiento deportivo para corredores. "
-        f"Contexto detallado:\n{texto_resumen}\n"
-        f"Pregunta: {pregunta}"
+        "Analiza los datos con precisión y responde de forma clara y estructurada. "
+        "La respuesta debe ser concisa (máximo tres párrafos), con lenguaje natural y profesional. "
+        "Evita repeticiones y tecnicismos innecesarios. "
+        "Si no existe suficiente información para dar una respuesta exacta, di algo como "
+        "'No lo sé con certeza' o 'No hay información suficiente para afirmarlo'. "
+        "No inventes datos ni hagas suposiciones sin base. "
+        f"\n\nContexto analizado:\n{texto_resumen}\n\n"
+        f"Pregunta del usuario:\n{pregunta}"
     )
-    payload = {"model": "sonar-pro", "messages": [{"role": "system", "content": "Eres un asistente experto en análisis de rendimiento deportivo."}, {"role": "user", "content": prompt}], "max_tokens": 200}
+
+    # 🔹 Payload ajustado: elimina redundancia con el system message
+    payload = {
+        "model": "sonar-pro",
+        "messages": [
+            {
+                "role": "system",
+                "content": (
+                    "Eres un asistente experto en análisis de rendimiento deportivo. "
+                    "Debes responder de forma breve, clara y precisa, en un máximo de tres párrafos."
+                )
+            },
+            {"role": "user", "content": prompt}
+        ],
+        "max_tokens": 200
+    }
 
     try:
-        response = requests.post("https://api.perplexity.ai/chat/completions", headers=headers, json=payload, timeout=30)
+        response = requests.post(
+            "https://api.perplexity.ai/chat/completions",
+            headers=headers,
+            json=payload,
+            timeout=30
+        )
     except Exception as e:
         st.error(f"Error al conectar con Perplexity: {e}")
         return None
@@ -187,10 +215,11 @@ def analizar_con_perplexity(texto_resumen, pregunta):
         if not contenido:
             st.error("La respuesta de la IA no contiene texto válido.")
             return None
-        return contenido
+        return contenido.strip()
     except Exception as e:
         st.error(f"Error al procesar la respuesta de Perplexity: {e}")
         return None
+
 
 def tab_analisis_ia(df_sesion):
     resumen = st.session_state.get("resumen_clusters")
@@ -319,5 +348,6 @@ def truncar_a_frase_completa(texto):
         return texto[:pos_max]
     else:
         return texto
+
 
 
