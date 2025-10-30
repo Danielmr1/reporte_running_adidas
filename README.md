@@ -137,7 +137,7 @@ La app estará disponible en: **http://localhost:8501**
 |--------|-------|
 | **URL en producción** | https://reporte-running-adidas.streamlit.app/ |
 | **Repositorio** | https://github.com/Danielmr1/reporte_running_adidas |
-| **Límite IA diario** | 2 consultas |
+| **Límite IA diario** | 3 consultas |
 | **Zona horaria** | Europe/London |
 | **Ambiente** | Production |
 
