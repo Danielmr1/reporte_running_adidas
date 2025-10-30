@@ -276,7 +276,7 @@ def puede_consultar_ia():
     if data["fecha"] != hoy:
         guardar_contador_gs(hoy, 0)
         return True
-    return data["contador"] < 2 # Límite diario de 2 consultas
+    return data["contador"] < 3 # Límite diario de 3 consultas
 
 def incrementar_contador():
     data = leer_contador_gs()
@@ -319,4 +319,5 @@ def truncar_a_frase_completa(texto):
         return texto[:pos_max]
     else:
         return texto
+
 
