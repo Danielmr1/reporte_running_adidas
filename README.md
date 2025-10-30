@@ -187,6 +187,101 @@ La app incluye las siguientes pestañas interactivas:
 
 ---
 
+## 🔄 Actualizaciones en producción (Streamlit Cloud)
+
+### ⚠️ Cambios en el código = Actualización automática
+
+Cuando hagas cambios en GitHub (por ejemplo, cambiar el número de consultas de IA), Streamlit Cloud detecta automáticamente los cambios y redeploy sin que hagas nada manualmente.
+
+**Flujo automático:**
+
+```
+1. Editas el archivo en GitHub
+   └─ Opción A: Con el lápiz ✏️ (cambios rápidos)
+      Opción B: En Codespace (cambios complejos)
+
+2. Haces commit y push
+   └─ El código se actualiza en GitHub
+
+3. Streamlit Cloud detecta cambios
+   └─ Automáticamente (cada 1-2 minutos)
+
+4. Redeploy automático
+   └─ Tu app se actualiza en 1-2 minutos
+
+5. La app en producción tiene los cambios
+   └─ https://reporte-running-adidas.streamlit.app/
+```
+
+---
+
+### 📝 Cambios rápidos en GitHub (cambio mínimo: un número, una línea)
+
+**Para cambios pequeños, edita directamente en GitHub:**
+
+1. Ve a: https://github.com/Danielmr1/reporte_running_adidas
+2. Abre el archivo (ej. `analisis_ia.py`)
+3. Haz clic en el **lápiz ✏️** (botón editar)
+4. Modifica el valor
+5. Scroll down → Haz clic en **"Commit changes"**
+6. ¡Listo! Streamlit Cloud redeploy automático en 1-2 minutos
+
+**Ventajas:** Rápido, sin conflictos, sin necesidad de Codespace
+
+---
+
+### 🖥️ Cambios complejos en Codespace (múltiples cambios, testing local)
+
+**Para cambios complejos, usa Codespace con testing local:**
+
+```bash
+# 1. Abre Codespace
+# https://share.streamlit.io/ → En la aplicación → Menu → Edit with Codespaces
+
+# 2. Descarga los cambios remotos (SIEMPRE primero)
+git pull
+
+# 3. Edita los archivos que necesites
+# (Puedes hacer testing local: streamlit run main.py)
+
+# 4. Guarda y sube los cambios
+git add .
+git commit -m "Describe tu cambio aquí"
+git push
+
+# ¡Listo! Streamlit Cloud detecta y redeploy automático
+```
+
+**Ventajas:** Testing local, múltiples cambios, mejor control
+
+---
+
+### ⚠️ Notas importantes sobre Codespace
+
+- **Siempre comienza con `git pull`:** Codespace NO sincroniza automáticamente con GitHub. Si hiciste cambios en GitHub (o desde otra ventana), debes hacer `git pull` para tenerlos localmente.
+
+- **Secuencia correcta:**
+  ```bash
+  git pull                    # Descargar cambios remotos
+  # ... edita archivos ...
+  git add .
+  git commit -m "tu mensaje"
+  git push                    # Subir cambios
+  ```
+
+- **Evita conflictos:** No olvides `git pull` antes de empezar a trabajar.
+
+- **Ejemplo real:**
+  ```bash
+  @Danielmr1 ➜ /workspaces/reporte_running_adidas (main) $ git pull
+  @Danielmr1 ➜ /workspaces/reporte_running_adidas (main) $ git add .
+  @Danielmr1 ➜ /workspaces/reporte_running_adidas (main) $ git commit -m "Cambio número de consultas"
+  @Danielmr1 ➜ /workspaces/reporte_running_adidas (main) $ git push
+  ```
+
+---
+
+
 ## 📎 Enlaces útiles
 
 - 📚 [Documentación Streamlit](https://docs.streamlit.io)
